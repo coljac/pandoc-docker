@@ -4,7 +4,7 @@ This creates a docker image for pandoc/markdown/latex, geared for generating ast
 
 It installs pandoc, texlive, pandoc-crossref, pandoc-citeproc, and some custom scripts for shepherding a markdown document through to submittable tex and PDF.
 
-The docker image is ~3GB, but 
+The docker image is ~3GB, but no worries about keeping pandoc and the various filters in sync.
 
 ## Usage
 
