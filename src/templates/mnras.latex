@@ -1,0 +1,88 @@
+% using mnras_template.tex
+\documentclass[a4paper,fleqn,usenatbib]{mnras}
+
+\usepackage[T1]{fontenc}
+\usepackage{ae,aecompl}
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+\usepackage{graphicx}	% Including figure files
+\usepackage{amsmath}	% Advanced maths commands
+\usepackage{amssymb}	% Extra maths symbols
+\usepackage{booktabs}
+
+\usepackage{txfonts}
+
+% \usepackage{float}
+% \let\origfigure=\figure
+% \let\endorigfigure=\endfigure
+% \renewenvironment{figure}[1][]{%
+  % \begin{figure*}
+% }{%
+  % \end{figure*}
+% }
+
+
+$if(title)$
+\title[$if(shorttitle)$$shorttitle$$endif$]{$title$}
+$endif$
+$if(author)$
+\author[$for(author)$$author.name$$sep$, $endfor$]{$for(author)$$author.name$$$^{$for(author.affiliation)$$author.affiliation$$sep$, $endfor$}$$$if(author.email)$\thanks{E-mail:$author.email$}$endif$$sep$, $endfor$\\
+$for(affiliation)$$$^{$affiliation.number$}$$$affiliation.name$$sep$\\
+$endfor$}
+$endif$
+
+\begin{document}
+
+\date{$date$}
+% TODO
+\pagerange{\pageref{firstpage}--\pageref{lastpage}} \pubyear{2016}
+
+$if(title)$
+\maketitle
+$endif$
+
+% TODO
+\label{firstpage}
+
+$if(abstract)$ \begin{abstract}
+$abstract$
+\end{abstract}
+$endif$
+
+
+$if(keywords)$
+\begin{keywords}
+$for(keywords)$$keywords$$sep$ -- $endfor$
+\end{keywords}
+$endif$
+
+$body$
+
+%%%%%%%%%%%%%%%%%%%% REFERENCES %%%%%%%%%%%%%%%%%%
+
+$if(natbib)$
+$if(bibliography)$
+$if(biblio-title)$
+\bibliographystyle{mnras}
+$if(book-class)$
+\renewcommand\bibname{$biblio-title$}
+$else$
+\renewcommand\refname{$biblio-title$}
+$endif$
+$endif$
+\bibliography{$for(bibliography)$$bibliography$$sep$,$endfor$}
+
+$endif$
+$endif$
+
+$if(biblatex)$
+\bibliographystyle{mnras}
+% \bibliography{references}
+\printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
+$endif$
+
+
+\label{lastpage}
+\end{document}
+

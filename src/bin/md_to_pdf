@@ -1,0 +1,5 @@
+#!/bin/bash
+docname=$1
+
+md_to_tex $docname
+make_pdf $docname 

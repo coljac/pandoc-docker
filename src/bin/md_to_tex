@@ -1,0 +1,18 @@
+#!/bin/bash
+docname=$1
+
+sed -f /src/filter/fixbib.sed ${docname}.bib > tmp.bib
+mv tmp.bib ${docname}.bib
+
+pandoc -s -R -o ${docname}.tex --template /src/templates/mnras.latex  -F pandoc-crossref \
+    -F /src/filter/table_filter.py --latex-engine=xelatex \
+    --biblio=./${docname}.bib --natbib \
+    --csl=/src/templates/annual-review-of-astronomy-and-astrophysics.csl \
+    ${docname}.md
+
+sed -f /src/filter/fixtex.sed ${docname}.tex > tmp.tex
+mv tmp.tex ${docname}.tex
+
+awk -f /src/filter/figures.awk ${docname}.tex > tmp.tex
+mv tmp.tex ${docname}.tex
+
