@@ -36,7 +36,7 @@ $endif$
 
 \date{$date$}
 % TODO
-\pagerange{\pageref{firstpage}--\pageref{lastpage}} \pubyear{2016}
+\pagerange{\pageref{firstpage}--\pageref{lastpage}} \pubyear{2017}
 
 $if(title)$
 \maketitle
