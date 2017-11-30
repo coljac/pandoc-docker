@@ -1,0 +1,3 @@
+http://mirrors.ctan.org/macros/latex/contrib/mnras.zip
+http://journals.aas.org/authors/aastex/aastexv6.1.zip
+http://mirrors.ctan.org/macros/latex/contrib/elsarticle.zip
