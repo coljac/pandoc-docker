@@ -1,11 +1,14 @@
 #!/bin/bash
 docname=$1
+templatename=$2
 
-sed -f /src/filter/fixbib.sed ${docname}.bib > tmp.bib
+sed -r -f /src/filter/fixbib.sed ${docname}.bib > tmp.bib
 mv tmp.bib ${docname}.bib
 
-pandoc -s -R -o ${docname}.tex --template /src/templates/mnras.latex  -F pandoc-crossref \
-    -F /src/filter/table_filter.py --latex-engine=xelatex \
+# pandoc -s -R -o ${docname}.tex --template /src/templates/$templatename.latex  -F pandoc-crossref \
+    # -F /src/filter/table_filter.py --pdf-engine=xelatex \
+pandoc -s --from markdown+raw_tex -o ${docname}.tex --template /src/templates/$templatename.latex -F pandoc-crossref \
+    --pdf-engine=xelatex \
     --biblio=./${docname}.bib --natbib \
     --csl=/src/templates/annual-review-of-astronomy-and-astrophysics.csl \
     ${docname}.md

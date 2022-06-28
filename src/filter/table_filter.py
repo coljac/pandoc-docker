@@ -1,10 +1,6 @@
-#!/usr/bin/env python
-
-# For two-column mode.
-# May need work.
-# Taken from:
-# https://groups.google.com/forum/#!msg/pandoc-discuss/RUC-tuu_qf0/h-H3RRVt1coJ
-
+#!/usr/bin/python3
+# Credits: Wagner Macedo, https://groups.google.com/forum/#!msg/pandoc-discuss/RUC-tuu_qf0/h-H3RRVt1coJ
+# This filter lets you have simple Pandoc tables (_with headers_) in a two-column layout such as those of ACM and IEEE.
 import pandocfilters as pf
 
 
@@ -44,7 +40,8 @@ def tbl_contents(s):
     for row in s:
         para = []
         for col in row:
-            para.extend(col[0]['c'])
+            if len(col) > 0:
+                para.extend(col[0]['c'])
             para.append(inlatex(' & '))
         result.extend(para)
         result[-1] = inlatex(r' \\' '\n')
@@ -53,26 +50,23 @@ def tbl_contents(s):
 
 def do_filter(k, v, f, m):
     if k == "Table":
-        # return [latex(r'\begin{table}[ht]' '\n' r'\centering' '\n'),
         return [
-            latex(r'\begin{table*}'
+            latex(r'\begin{table}[ht]'
                   '\n'
                   r'\centering'
-                  '\n'), tbl_caption(v[0]),
-            latex(r'\begin{tabular}{@{}%s@{}}' % tbl_alignment(v[1]) + (
-                '\n'
-                r'\toprule')), tbl_headers(v[3]), tbl_contents(v[4]),
+                  '\n'),
+            tbl_caption(v[0]),
+            latex(r'\begin{tabular}{@{}%s@{}}' % tbl_alignment(v[1]) +
+                  ('\n'
+                   r'\toprule')),
+            tbl_headers(v[3]),
+            tbl_contents(v[4]),
             latex(r'\bottomrule'
                   '\n'
-                  r'\end{tabular}'), latex(r'\end{table*}')
+                  r'\end{tabular}'),
+            latex(r'\end{table}')
         ]
-
-
-def caps(key, value, format, meta):
-    if key == 'Str':
-        return pf.Str(value.upper())
 
 
 if __name__ == "__main__":
     pf.toJSONFilter(do_filter)
-    # pf.toJSONFilter(caps)

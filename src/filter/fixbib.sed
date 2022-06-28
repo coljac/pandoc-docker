@@ -10,4 +10,7 @@ s/Astronomy and Astrophysics/A\&A/g
 s/Astronomy and Computing/Astron. Comput./g
 s/Contemporary Physics/Contemp. Phys./g
 s/Neural Computation/Neural Comput./g
+s/ARA&A/ARA\&A/g
+s/(journal = \{[^\}&]*)&([^\}]*\})/\1\\\&\2/g
+
 

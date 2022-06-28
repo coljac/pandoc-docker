@@ -23,7 +23,7 @@
 %%
 %%
 %% using aastex version 6.1
-\documentclass[twocolumn]{aastex62}
+\documentclass{aastex62}
 
 %% The default is a single spaced, 10 point font, single spaced article.
 %% There are 5 other style options available via an optional argument. They
@@ -82,9 +82,9 @@
 \newcommand\aastex{AAS\TeX}
 \newcommand\latex{La\TeX}
 \usepackage{booktabs}
-
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
 %% Reintroduced the \received and \accepted commands from AASTeX v5.2
 \received{$date$}
 \revised{\today}
@@ -254,9 +254,9 @@ $endif$
 %% keywords and the rules for their use.
 
 $if(keywords)$
-\begin{keywords}
+\keywords{
 $for(keywords)$$keywords$$sep$ -- $endfor$
-\end{keywords}
+}
 $endif$
 
 %% From the front matter, we move on to the body of the paper.

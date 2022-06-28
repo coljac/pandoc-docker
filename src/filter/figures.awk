@@ -36,8 +36,15 @@ BEGIN {
   iswide = 0
 }
 
-#!/(begin|end){figure/ { if (inblock) {
-!/{figure/ { if (inblock) {
+/,height=.textheight/ {
+    if (inblock) {
+        gsub(/,height=.textheight/, "")
+    }
+}
+
+# !/{figure/ { if (inblock) {
+!/(begin|end){figure/ { 
+    if (inblock) {
     currentfigure = currentfigure $0 "\n"
     if ($0 ~ /1col/) {
       iswide = 0
